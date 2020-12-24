@@ -18,7 +18,7 @@ contract TNSToken is Ownable {
   uint8 public decimals;
 
   
-  constructor(string memory _name, string memory  _symbol, uint8 _decimals,uint256 _totalSupply) public {
+  constructor() public {
         name = "The Neverending Story Token";
         symbol = "TNS";
         decimals = 18;
