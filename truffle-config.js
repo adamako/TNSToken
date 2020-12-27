@@ -24,6 +24,15 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config();
+const WalletProvider = require("truffle-wallet-provider");
+const Wallet = require('ethereumjs-wallet');
+const Web3 = require("web3");
+const w3 = new Web3();
+
+const PRIVKEY = "ff89236798bcea23c3f6e20b0987b2f93674c11fa20827519ff6a1c53aa12129";
+const INFURAKEY = "ee9ab6ac5f0e46c19f7f42f9d23c45b4";
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -47,6 +56,19 @@ module.exports = {
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
+    rinkeby:{
+       provider: function() {
+        return new WalletProvider(
+          Wallet.fromPrivateKey(
+            Buffer.from(PRIVKEY, "hex")), "https://rinkeby.infura.io/v3/"+INFURAKEY
+
+        );
+      },
+      gas: 4600000,
+      gasPrice: w3.utils.toWei("50", "gwei"),
+      network_id: "4",
+  },
+
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
